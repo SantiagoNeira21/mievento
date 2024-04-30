@@ -1,0 +1,21 @@
+/* Estilos para el contenedor principal */
+.Home {
+   
+    text-align: center;
+  }
+  
+ 
+  .Home-h1 {
+    
+    color: rgb(201, 12, 12);
+    
+  }
+  
+ 
+  .Home-p {
+    font-size: 1.2rem;
+    color: #f00707;
+    margin-bottom: 40px;
+  }
+  
+  
