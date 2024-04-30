@@ -1,10 +1,12 @@
 import React from 'react';
+import './Home.css';
+
 function Home() {
    
     return (
         <div  className="Home">
           <h1 className="Home-h1">
-            Bienvenido a nuestra página de reservas de eventos
+             Bienvenido a nuestra página de reservas de eventos
             </h1>
 
           <p className="Home-p">
@@ -12,6 +14,7 @@ function Home() {
             ¡Encuentra y reserva los mejores eventos cerca de ti!
             
             </p>
+
           
         </div>
       );
