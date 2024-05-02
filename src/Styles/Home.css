@@ -1,0 +1,23 @@
+
+.Home {
+   
+    text-align: center;
+    
+  }
+  
+ 
+  .Home-h1 {
+    
+    color: rgb(36, 177, 121);
+    text-shadow: #f00707;
+    font-weight: bold   ;
+  }
+  
+ 
+  .Home-p {
+    
+    color: #f00707;
+    margin-bottom: 40px;
+  }
+  
+  
