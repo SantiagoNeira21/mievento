@@ -2,11 +2,17 @@ import React,{useState} from 'react';
 import '../Styles/SignUp.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+
+
+
 const SignUp = () => {
   const[email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const[name, setName] = useState("");
   const[number, setNumber]= useState("");
+  const navigate = useNavigate();
+
 
   const signup =(e)=>{
     e.preventDefault();
@@ -14,6 +20,8 @@ const SignUp = () => {
     .then((userCredential) =>{
 
       console.log(userCredential);
+      console.log("Registrado existosamente como, "+ name + " "+ number+" "+ email+ " "+ password)
+      navigate('/home'); 
     }).catch((error)=>{
 
       console.log(error);
