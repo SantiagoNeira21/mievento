@@ -1,10 +1,12 @@
 import React from 'react';
 import '../Styles/Home.css';
+import Navbar from '../Components/Navbar/Navbar';
 
 const Home = () => {
    
     return (
         <div  className="Home">
+          <Navbar/>
           <h1 className="Home-h1">
              Bienvenido a nuestra página de reservas de eventos
             </h1>

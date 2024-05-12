@@ -1,0 +1,83 @@
+.navbar{
+    height: 120px;
+    padding: 0px 142.5px;
+    background: #F9EFE4 !important;
+}
+.container-fluid{
+    padding: 0px 142.5px;
+}
+.navbar-brand {
+  color: #000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: "K2D", sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px; /* 75% */
+}
+.navbar-nav{
+    display: flex;
+    height: 59px;
+    padding: 5px 0px 5px 90.516px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 15.992px;
+}
+.navbar-botones{
+    display: flex;
+    height: 59px;
+    padding: 5px 0px 5px 90.516px;
+    padding-left: 40%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 15.992px;
+    
+}
+.nav-link {
+  color: #2f2f30;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27px; /* 180% */
+}
+.btn, .btn2 {
+  display: flex;
+  height: 49px;
+  width: 150px;
+  padding: 10.5px 22.93px 11.5px 25px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #2f2f30;
+  color: #2f2f30;
+  font-family: "Inter", sans-serif;
+  font-size: 14.5px;
+  font-style: normal;
+  font-weight: 500;
+}
+.btn2 {
+  display: flex;
+  height: 49px;
+  padding: 10.5px 22.93px 11.5px 25px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #2f2f30;
+  background: #2f2f30;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 14.5px;
+  font-style: normal;
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+    .navbar,
+    .container-fluid,
+    .navbar-nav,
+    .navbar-botones,
+    .btn,
+    .btn2 {
+      padding: 0;
+    }
+  }
