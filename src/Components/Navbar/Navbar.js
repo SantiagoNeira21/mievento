@@ -1,15 +1,27 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
+  const [userName, setUserName] = useState(null);
 
+  useEffect(() => {
+    const storedUserName = localStorage.getItem('userName');
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
   const navigate = useNavigate();
 
   const resrvasBTN = () => {
 
+
     navigate('/Reservas');
+  }
+
+  const loginBTN = () => {
+    navigate('/Login');
   }
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -93,8 +105,14 @@ function Navbar() {
             </li>
           </ul>
           <div className="navbar-botones">
-            <button type="button" class="btn btn-outline-secondary">Iniciar Sesion</button>
-            <button type="button" class="btn2">Reserva Ya!</button>  
+          {userName ? (
+    <span>Bienvenido, {userName}</span>
+  ) : (
+    <button type="button" className="btn btn-outline-secondary" onClick={loginBTN}>
+      Iniciar Sesión
+    </button>
+  )}
+            <button type="button" class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
           </div>
         </div>
       </div>
