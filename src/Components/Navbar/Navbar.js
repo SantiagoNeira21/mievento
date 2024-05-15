@@ -1,6 +1,16 @@
 import React from "react";
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom';
+
+
 function Navbar() {
+
+  const navigate = useNavigate();
+
+  const resrvasBTN = () => {
+
+    navigate('/Reservas');
+  }
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -61,12 +71,12 @@ function Navbar() {
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="#">
-                    Action
+                    Hacer reservas
                   </a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="#">
-                    Another action
+                    ver reservas
                   </a>
                 </li>
                 <li>
@@ -84,7 +94,7 @@ function Navbar() {
           </ul>
           <div className="navbar-botones">
             <button type="button" class="btn btn-outline-secondary">Iniciar Sesion</button>
-            <button type="button" class="btn2">Reserva Ya!</button>  
+            <button type="button"  class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
           </div>
         </div>
       </div>

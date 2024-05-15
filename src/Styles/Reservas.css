@@ -1,0 +1,14 @@
+/* styles.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .custom-calendar .p-calendar {
+    width: 500px;
+    height: 500px;
+    
+  }

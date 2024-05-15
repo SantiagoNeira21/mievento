@@ -15,7 +15,7 @@ const Login = () => {
       .then((userCredential) => {
         console.log("Bienvenido, " + email, password);
         console.log(userCredential);
-        navigate('/home'); // Redirigir a la pantalla de Home
+        navigate('/home'); // Redirigir a la pantalla de Home 
       })
       .catch((error) => {
         console.log("Lo sentimos, " + email, password + " no son correctos.");
