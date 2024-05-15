@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/Home">
+        <a class="navbar-brand" href="/">
           miEvento.com
         </a>
         <button
@@ -94,7 +94,7 @@ function Navbar() {
           </ul>
           <div className="navbar-botones">
             <button type="button" class="btn btn-outline-secondary">Iniciar Sesion</button>
-            <button type="button"  class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
+            <button type="button" class="btn2">Reserva Ya!</button>  
           </div>
         </div>
       </div>
