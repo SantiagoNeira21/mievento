@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebase'; // Importar la instancia de Firestore
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from '../Components/Navbar/Navbar';
 const AdminDashboard = () => {
   const [reservations, setReservations] = useState([]);
   const [users, setUsers] = useState([]);
@@ -89,6 +89,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
+         <Navbar/>
       <h1>Panel de Administración</h1>
 
       <h2>Reservas</h2>

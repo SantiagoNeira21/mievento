@@ -4,7 +4,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import '../Styles/Reservas.css';
 import { addDoc, collection } from "firebase/firestore"; // Importar las funciones necesarias de firebase/firestore
 import { db } from '../firebase'; // Importar la instancia de Firestore
-
+import Navbar from '../Components/Navbar/Navbar';
 export default function Reservas() {
   const [date, setDate] = useState(null);
   const [eventType, setEventType] = useState(null);
@@ -71,6 +71,7 @@ export default function Reservas() {
 
   return (
     <div className="card flex justify-content-center">
+       <Navbar/>
       <div className="custom-calendar">
         <Calendar value={date} onChange={handleDateChange} inline showWeek />
       </div>
