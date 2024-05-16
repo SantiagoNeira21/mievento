@@ -10,12 +10,22 @@ const Login = () => {
   const navigate = useNavigate();
 
   const login = (e) => {
+
+    if (email === 'Admin' && password === '123456') {
+      // Redirigir a la pantalla de AdminDashboard
+      navigate('/AdminDashboard');
+      return;
+    }
+
+
+
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Bienvenido, " + email, password);
         console.log(userCredential);
         navigate('/home'); // Redirigir a la pantalla de Home 
+        localStorage.setItem('userName', email.split('@')[0]);
       })
       .catch((error) => {
         console.log("Lo sentimos, " + email, password + " no son correctos.");

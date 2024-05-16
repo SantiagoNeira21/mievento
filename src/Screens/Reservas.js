@@ -2,28 +2,26 @@ import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import '../Styles/Reservas.css';
+import { addDoc, collection } from "firebase/firestore"; // Importar las funciones necesarias de firebase/firestore
+import { db } from '../firebase'; // Importar la instancia de Firestore
 
-// Importa el archivo CSS
 export default function Reservas() {
-
-
   const [date, setDate] = useState(null);
   const [eventType, setEventType] = useState(null);
   const [numPeople, setNumPeople] = useState(null);
   const [musicType, setMusicType] = useState(null);
   const [food, setFood] = useState(null);
   const [security, setSecurity] = useState(null);
-  const [address, setAddress]= useState(null);
-  const [place, setPlace]= useState(null);
+  const [address, setAddress] = useState(null);
+  const [place, setPlace] = useState(null);
 
   const handleEventTypeChange = (e) => {
     setEventType(e.target.value);
   };
 
-const handlePlaceChange = (e) => {
-
-setPlace(e.target.value);
-};
+  const handlePlaceChange = (e) => {
+    setPlace(e.target.value);
+  };
 
   const handleNumPeopleChange = (e) => {
     setNumPeople(e.target.value);
@@ -51,7 +49,7 @@ setPlace(e.target.value);
     setAddress(e.target.value);
   };
 
-  const handleReservar = () => {
+  const handleReservar = async () => {
     const formData = {
       fecha: date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : 'No seleccionada',
       tipoEvento: eventType || 'No seleccionado',
@@ -59,11 +57,17 @@ setPlace(e.target.value);
       comida: food || 'No seleccionada',
       seguridad: security || 'No seleccionada',
       direccion: address || 'No ingresada',
-      Lugar : place || "No ingresada",
+      Lugar: place || "No ingresada",
     };
-    console.log('Información de la reserva:', formData);
-  };
 
+    try {
+      const reservasCollectionRef = collection(db, "reservas");
+      await addDoc(reservasCollectionRef, formData);
+      console.log("Reserva registrada con éxito");
+    } catch (error) {
+      console.error("Error al registrar la reserva:", error);
+    }
+  };
 
   return (
     <div className="card flex justify-content-center">
