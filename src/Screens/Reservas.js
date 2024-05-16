@@ -14,9 +14,16 @@ export default function Reservas() {
   const [food, setFood] = useState(null);
   const [security, setSecurity] = useState(null);
   const [address, setAddress]= useState(null);
+  const [place, setPlace]= useState(null);
+
   const handleEventTypeChange = (e) => {
     setEventType(e.target.value);
   };
+
+const handlePlaceChange = (e) => {
+
+setPlace(e.target.value);
+};
 
   const handleNumPeopleChange = (e) => {
     setNumPeople(e.target.value);
@@ -51,7 +58,8 @@ export default function Reservas() {
       musica: musicType || 'No seleccionada',
       comida: food || 'No seleccionada',
       seguridad: security || 'No seleccionada',
-      direccion: address || 'No ingresada'
+      direccion: address || 'No ingresada',
+      Lugar : place || "No ingresada",
     };
     console.log('Información de la reserva:', formData);
   };
@@ -229,7 +237,45 @@ export default function Reservas() {
 
       {/* #######################*/}
 
+{/* #######################*/}
+
+<div>
+        <label><h2>Tipo de lugar</h2> </label>
+        <div>
+          <input
+            type="radio"
+            value="Campestre"
+            checked={place === 'Campestre'}
+            onChange={handlePlaceChange}
+          />
+          <label>Campestre</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="Abierto"
+            checked={place === 'Abierto'}
+            onChange={handlePlaceChange}
+          />
+          <label>Abierto</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="Cerrado"
+            checked={place   === 'Cerrado'}
+            onChange={handlePlaceChange}
+          />
+          <label>Cerrado</label>
+        </div>
+      </div>
+
+
+
       <div>
+
+
+
         <label><h2>Direccion: </h2></label>
         
         <input type="text" value={address} onChange={handleAddressChange} />
