@@ -112,6 +112,33 @@ export default function FormularioPersonal() {
         <div>
           <input
             type="radio"
+            value="mesero"
+            checked={tipoPersonal === "mesero"}
+            onChange={handleTipoPersonalChange}
+          />
+          <label>Mesero</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="audio"
+            checked={tipoPersonal === "audio"}
+            onChange={handleTipoPersonalChange}
+          />
+          <label>Audio</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="todero"
+            checked={tipoPersonal === "todero"}
+            onChange={handleTipoPersonalChange}
+          />
+          <label>Todero</label>
+        </div>
+        <div>
+          <input
+            type="radio"
             value="otro"
             checked={tipoPersonal === "otro"}
             onChange={handleTipoPersonalChange}
