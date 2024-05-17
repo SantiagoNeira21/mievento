@@ -53,6 +53,7 @@ function Header() {
           <div className="centered"><EventSection /></div>
         </div>
       </main>
+      
     );
   }
 
