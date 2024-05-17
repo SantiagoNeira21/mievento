@@ -1,33 +1,42 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import '../Styles/SignUp.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-
-
+import { saveUsuarios } from '../Peticiones/saveUsuarios';
 
 const SignUp = () => {
-  const[email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const[name, setName] = useState("");
-  const[number, setNumber]= useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
   const navigate = useNavigate();
 
-
-  const signup =(e)=>{
+  const signup = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) =>{
 
-      console.log(userCredential);
-      console.log("Registrado existosamente como, "+ name + " "+ number+" "+ email+ " "+ password)
-      navigate('/home'); 
-    }).catch((error)=>{
+    const userData = {
+      name,
+      number,
+      email,
+      password,
+    };
 
-      console.log(error);
-    })
-   
-  }
+    try {
+      const isRegistered = await saveUsuarios(userData);
+
+      if (isRegistered) {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log(userCredential);
+        console.log("Registrado existosamente como, " + name + " " + number + " " + email + " " + password);
+        navigate('/home');
+      } else {
+        console.log("Error al registrar el usuario");
+      }
+    } catch (error) {
+      console.error("Error during signup", error);
+    }
+  };
 
   return (
     <div className="register-container">
@@ -39,16 +48,36 @@ const SignUp = () => {
         <h1>Registro</h1>
         <h3>Ingresa tu información</h3>
         <div className="form-group">
-          <input type="name"  placeholder="Nombre" value={name} onChange={(e) =>setName(e.target.value)}/>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <input type="number"  placeholder="Telefono" value={number} onChange={(e) =>setNumber(e.target.value)}/>
+          <input
+            type="text"
+            placeholder="Teléfono"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <input type="email"  placeholder="Correo electronico" value={email} onChange={(e) =>setEmail(e.target.value)}/>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <input type="password"  placeholder="Contraseña" value={password} onChange={(e) =>setPassword(e.target.value)}/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <button onClick={signup} className="register-btn">Entra</button>
         <p>

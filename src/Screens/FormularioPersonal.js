@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase";
+
+import { savePersonal } from "../Peticiones/savePersonal"; // Importa la función para obtener los registros de personal
 
 export default function FormularioPersonal() {
   const [nombre, setNombre] = useState("");
@@ -25,14 +25,15 @@ export default function FormularioPersonal() {
   };
 
   const handleRegistrar = async () => {
+    const nuevoRegistro = {
+      nombre,
+      cedula,
+      edad,
+      tipoPersonal,
+    };
+
     try {
-      const personalCollectionRef = collection(db, "Personal");
-      await addDoc(personalCollectionRef, {
-        nombre,
-        cedula,
-        edad,
-        tipoPersonal,
-      });
+      await savePersonal(nuevoRegistro);
       console.log("Personal registrado con éxito");
       // Restablecer los campos del formulario
       setNombre("");
@@ -43,7 +44,6 @@ export default function FormularioPersonal() {
       console.error("Error al registrar el personal:", error);
     }
   };
-
   return (
     <div>
       <h2>Registrar Personal</h2>

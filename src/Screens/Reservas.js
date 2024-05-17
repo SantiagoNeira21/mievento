@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import '../Styles/Reservas.css';
-import { addDoc, collection } from "firebase/firestore"; // Importar las funciones necesarias de firebase/firestore
-import { db } from '../firebase'; // Importar la instancia de Firestore
 import Navbar from '../Components/Navbar/Navbar';
+import { saveReserva } from '../Peticiones/saveReserva'; // Importa la función para guardar la reserva
+
 export default function Reservas() {
   const [date, setDate] = useState(null);
   const [eventType, setEventType] = useState(null);
@@ -49,7 +49,7 @@ export default function Reservas() {
     setAddress(e.target.value);
   };
 
-  const handleReservar = async () => {
+  const handleReservar = () => {
     const formData = {
       fecha: date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : 'No seleccionada',
       tipoEvento: eventType || 'No seleccionado',
@@ -60,14 +60,14 @@ export default function Reservas() {
       Lugar: place || "No ingresada",
     };
 
-    try {
-      const reservasCollectionRef = collection(db, "reservas");
-      await addDoc(reservasCollectionRef, formData);
-      console.log("Reserva registrada con éxito");
-    } catch (error) {
-      console.error("Error al registrar la reserva:", error);
-    }
+    saveReserva(formData); // Llama a la función para guardar la reserva
   };
+
+
+
+
+
+
 
   return (
     <div className="card flex justify-content-center">
