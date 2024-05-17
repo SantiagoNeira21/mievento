@@ -1,0 +1,100 @@
+/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Bottom left text */
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+  
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+  
+  /* Top right text */
+  .top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+  }
+  
+  /* Bottom right text */
+  .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+  }
+  
+  /* Centered text */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.event-section {
+    display: flex;
+    position: relative;
+    z-index: 10;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 36px;
+    margin-bottom: 7px;
+    max-width: 100%;
+    width: 685px;
+}
+
+.event-section h1 {
+    align-self: stretch;
+    text-align: center;
+    color: red; /* Cambia el color del texto a rojo */
+    line-height: 122%;
+}
+
+.event-section h2,
+.event-section h3 {
+    margin-top: 4px;
+    text-align: center;
+    line-height: 122%;
+}
+
+/* Estilos para EmailForm */
+.email-form {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    padding-left: 7px;
+    margin-top: 20px;
+    max-width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid white;
+    border-radius: 31.456px;
+    width: 461px;
+}
+
+.email-form input[type="email"] {
+    margin: auto;
+    line-height: 172%;
+    text-overflow: ellipsis;
+}
+
+.email-form button {
+    position: relative;
+    z-index: 10;
+    justify-content: center;
+    padding: 5px;
+    height: 6px;
+    background-color: blue;
+    line-height: 233%;
+    border-radius: 60.492px;
+    text-overflow: ellipsis;
+}
