@@ -1,152 +1,95 @@
 import React, { useState } from "react";
-
-import { savePersonal } from "../Peticiones/savePersonal"; // Importa la función para obtener los registros de personal
+import { savePersonal } from "../Peticiones/savePersonal"; // Importa la función para guardar el personal
 
 export default function FormularioPersonal() {
   const [nombre, setNombre] = useState("");
-  const [cedula, setCedula] = useState("");
-  const [edad, setEdad] = useState("");
-  const [tipoPersonal, setTipoPersonal] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [contacto, setContacto] = useState("");
+  const [ID, setID] = useState("");
+  const [disponible, setDisponible] = useState(false);
 
-  const handleNombreChange = (e) => {
-    setNombre(e.target.value);
-  };
-
-  const handleCedulaChange = (e) => {
-    setCedula(e.target.value);
-  };
-
-  const handleEdadChange = (e) => {
-    setEdad(e.target.value);
-  };
-
-  const handleTipoPersonalChange = (e) => {
-    setTipoPersonal(e.target.value);
-  };
+  const handleNombreChange = (e) => setNombre(e.target.value);
+  const handleApellidoChange = (e) => setApellido(e.target.value);
+  const handleCargoChange = (e) => setCargo(e.target.value);
+  const handleContactoChange = (e) => setContacto(e.target.value);
+  const handleIDChange = (e) => setID(e.target.value);
+  const handleDisponibleChange = (e) => setDisponible(e.target.checked);
 
   const handleRegistrar = async () => {
     const nuevoRegistro = {
+      ID,
       nombre,
-      cedula,
-      edad,
-      tipoPersonal,
+      apellido,
+      cargo,
+      contacto,
+      disponible,
     };
 
+    console.log("Registrando:", nuevoRegistro); // Muestra el objeto en la consola
+
     try {
-      await savePersonal(nuevoRegistro);
-      console.log("Personal registrado con éxito");
-      // Restablecer los campos del formulario
-      setNombre("");
-      setCedula("");
-      setEdad("");
-      setTipoPersonal("");
+      const response = await savePersonal(nuevoRegistro);
+
+      if (response.ok) {
+        console.log("Personal guardado exitosamente");
+
+        // Restablecer los campos del formulario
+        setID("");
+        setNombre("");
+        setApellido("");
+        setCargo("");
+        setContacto("");
+        setDisponible(false);
+      } else {
+        console.error("Error al registrar el personal:", response.status);
+      }
     } catch (error) {
       console.error("Error al registrar el personal:", error);
     }
   };
+
   return (
     <div>
       <h2>Registrar Personal</h2>
       <div>
+        <label>Cedula:</label>
+        <input type="text" value={ID} onChange={handleIDChange} />
+      </div>
+      <div>
         <label>Nombre:</label>
-        <input
-          type="text"
-          value={nombre}
-          onChange={handleNombreChange}
-        />
+        <input type="text" value={nombre} onChange={handleNombreChange} />
       </div>
       <div>
-        <label>Cédula:</label>
-        <input
-          type="text"
-          value={cedula}
-          onChange={handleCedulaChange}
-        />
+        <label>Apellido:</label>
+        <input type="text" value={apellido} onChange={handleApellidoChange} />
       </div>
       <div>
-        <label>Edad:</label>
-        <input
-          type="text"
-          value={edad}
-          onChange={handleEdadChange}
-        />
-      </div>
-      <div>
-        <label>Tipo de Personal:</label>
-        <div>
-          <input
-            type="radio"
-            value="bailarin"
-            checked={tipoPersonal === "bailarin"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Bailarín</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="cantante"
-            checked={tipoPersonal === "cantante"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Cantante</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="cocinero"
-            checked={tipoPersonal === "cocinero"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Cocinero</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="musico"
-            checked={tipoPersonal === "musico"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Músico</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="mesero"
-            checked={tipoPersonal === "mesero"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Mesero</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="audio"
-            checked={tipoPersonal === "audio"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Audio</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="todero"
-            checked={tipoPersonal === "todero"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Todero</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="otro"
-            checked={tipoPersonal === "otro"}
-            onChange={handleTipoPersonalChange}
-          />
-          <label>Otro</label>
-        </div>
-      </div>
-      <button onClick={handleRegistrar}>Registrar</button>
-    </div>
-  );
+        <label>Cargo:</label>
+        <select value={cargo} onChange={handleCargoChange}>
+          <option value="">Seleccione un cargo</option>
+          <option value="Camarero">Camarero</option>
+          <option value="Seguridad">Seguridad</option>
+          <option value="DJ">DJ</option>
+<option value="Bailarín">Bailarín</option>
+<option value="Cantante">Cantante</option>
+<option value="Cocinero">Cocinero</option>
+<option value="Músico">Músico</option>
+<option value="Mesero">Mesero</option>
+<option value="Audio">Audio</option>
+<option value="Todero">Todero</option>
+<option value="Otro">Otro</option>
+</select>
+</div>
+<div>
+<label>Contacto:</label>
+<input type="text" value={contacto} onChange={handleContactoChange} />
+</div>
+<div>
+<label>Disponible:</label>
+<input type="checkbox" checked={disponible} onChange={handleDisponibleChange} />
+</div>
+<button onClick={handleRegistrar}>Registrar</button>
+</div>
+);
 }
