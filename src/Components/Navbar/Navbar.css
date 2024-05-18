@@ -2,9 +2,7 @@
     height: 120px;
     padding: 0px 142.5px;
     background: #F9EFE4 !important;
-}
-.container-fluid{
-    padding: 0px 142.5px;
+    width: 100vw;
 }
 .navbar-brand {
   color: #000;
