@@ -20,6 +20,12 @@ function Navbar() {
     navigate('/Reservas');
   }
 
+   const InicioSesion = () => {
+
+
+    navigate('/Login');
+  }
+
   const loginBTN = () => {
     navigate('/Login');
   }
@@ -113,6 +119,7 @@ function Navbar() {
     </button>
   )}
             <button type="button" class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
+            <button type="button" class="btn3" onClick={InicioSesion}>Inicia sesion en otra cuenta!</button>  
           </div>
         </div>
       </div>
