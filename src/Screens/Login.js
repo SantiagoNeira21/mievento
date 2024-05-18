@@ -3,6 +3,7 @@ import '../Styles/Login.css';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +31,12 @@ const Login = () => {
       .catch((error) => {
         console.log("Lo sentimos, " + email, password + " no son correctos.");
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops... revisa correo y contrasena',
+          text: 'Algo salió mal!',
+          footer: '<a href>Por qué tengo este problema?</a>'
+      });
       });
   };
 

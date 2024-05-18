@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchReservations } from '../Peticiones/fetchReservations';
 import { fetchPersonal } from '../Peticiones/fetchPersonal';
 import { fetchUsers } from '../Peticiones/fetchUsers';
+import "../Styles/AdminDashboard.css"
 
 const AdminDashboard = () => {
   const [reservations, setReservations] = useState([]);
