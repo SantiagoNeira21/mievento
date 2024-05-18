@@ -6,19 +6,19 @@ export default function FormularioPersonal() {
   const [apellido, setApellido] = useState("");
   const [cargo, setCargo] = useState("");
   const [contacto, setContacto] = useState("");
-  const [ID, setID] = useState("");
+  const [idPersonal, setidPersonal] = useState("");
   const [disponible, setDisponible] = useState(false);
 
   const handleNombreChange = (e) => setNombre(e.target.value);
   const handleApellidoChange = (e) => setApellido(e.target.value);
   const handleCargoChange = (e) => setCargo(e.target.value);
   const handleContactoChange = (e) => setContacto(e.target.value);
-  const handleIDChange = (e) => setID(e.target.value);
+  const handleIDChange = (e) => setidPersonal(e.target.value);
   const handleDisponibleChange = (e) => setDisponible(e.target.checked);
 
   const handleRegistrar = async () => {
     const nuevoRegistro = {
-      ID,
+      idPersonal,
       nombre,
       apellido,
       cargo,
@@ -35,7 +35,7 @@ export default function FormularioPersonal() {
         console.log("Personal guardado exitosamente");
 
         // Restablecer los campos del formulario
-        setID("");
+        setidPersonal("");
         setNombre("");
         setApellido("");
         setCargo("");
@@ -54,7 +54,7 @@ export default function FormularioPersonal() {
       <h2>Registrar Personal</h2>
       <div>
         <label>Cedula:</label>
-        <input type="text" value={ID} onChange={handleIDChange} />
+        <input type="text" value={idPersonal} onChange={handleIDChange} />
       </div>
       <div>
         <label>Nombre:</label>

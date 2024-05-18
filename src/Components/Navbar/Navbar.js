@@ -112,7 +112,7 @@ function Navbar() {
           </ul>
           <div className="navbar-botones">
           {userName ? (
-    <span>Bienvenido, {userName}</span>
+    <span>Bienvenido</span>
   ) : (
     <button type="button" className="btn btn-outline-secondary" onClick={loginBTN}>
       Iniciar Sesión

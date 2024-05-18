@@ -78,7 +78,6 @@ const AdminDashboard = () => {
             <th>Tipo de Evento</th>
             <th>Música</th>
             <th>Comida</th>
-            <th>Seguridad</th>
             <th>Dirección</th>
             <th>Lugar</th>
             <th>Acciones</th>
@@ -91,7 +90,6 @@ const AdminDashboard = () => {
               <td>{reservation.tipoEvento}</td>
               <td>{reservation.musica}</td>
               <td>{reservation.comida}</td>
-              <td>{reservation.seguridad}</td>
               <td>{reservation.direccion}</td>
               <td>{reservation.lugar}</td>
               <td>

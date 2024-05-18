@@ -55,7 +55,7 @@ export default function Reservas() {
       tipoEvento: eventType || 'No seleccionado',
       musica: musicType || 'No seleccionada',
       comida: food || 'No seleccionada',
-      seguridad: security || 'No seleccionada',
+      
       direccion: address || 'No ingresada',
       Lugar: place || "No ingresada",
     };
@@ -81,29 +81,29 @@ export default function Reservas() {
         <div>
           <input
             type="radio"
-            value="social"
-            checked={eventType === 'social'}
+            value="15 años"
+            checked={eventType === '15 años'}
             onChange={handleEventTypeChange}
           />
-          <label>Social (Boda, religioso, etc)</label>
+          <label>15 años</label>
         </div>
         <div>
           <input
             type="radio"
-            value="cultural"
-            checked={eventType === 'cultural'}
+            value="Rumba"
+            checked={eventType === 'Rumba'}
             onChange={handleEventTypeChange}
           />
-          <label>Cultural</label>
+          <label>Rumba</label>
         </div>
         <div>
           <input
             type="radio"
-            value="academic"
-            checked={eventType === 'academic'}
+            value="Boda"
+            checked={eventType === 'Boda'}
             onChange={handleEventTypeChange}
           />
-          <label>Académico</label>
+          <label>Boda</label>
         </div>
       </div>
 
@@ -209,38 +209,7 @@ export default function Reservas() {
 
       {/* #######################*/}
 
-      <div>
-        <label><h2>Seguridad</h2> </label>
-        <div>
-          <input
-            type="radio"
-            value="Sin seguridad"
-            checked={security === 'Sin seguridad'}
-            onChange={handleSecurityChange}
-          />
-          <label>Sin seguridad</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="Seguridad basica"
-            checked={security === 'Seguridad basica'}
-            onChange={handleSecurityChange}
-          />
-          <label>Seguridad basica</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="Alta Seguridad"
-            checked={security   === 'Alta Seguridad'}
-            onChange={handleSecurityChange}
-          />
-          <label>Alta Seguridad</label>
-        </div>
-      </div>
-
-      {/* #######################*/}
+      
 
 {/* #######################*/}
 
