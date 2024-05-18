@@ -119,7 +119,7 @@ function Navbar() {
     </button>
   )}
             <button type="button" class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
-            <button type="button" class="btn3" onClick={InicioSesion}>Inicia sesion en otra cuenta!</button>  
+            <button type="button" class="btn3" onClick={InicioSesion}>Cerrar Sesion</button>  
           </div>
         </div>
       </div>
