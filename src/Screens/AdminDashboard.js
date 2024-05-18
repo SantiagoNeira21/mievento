@@ -3,6 +3,7 @@ import { db } from '../firebase'; // Importar la instancia de Firestore
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar/Navbar';
+import "../Styles/AdminDashboard.css"
 const AdminDashboard = () => {
   const [reservations, setReservations] = useState([]);
   const [users, setUsers] = useState([]);
