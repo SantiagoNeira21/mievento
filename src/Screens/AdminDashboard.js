@@ -1,86 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase'; // Importar la instancia de Firestore
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar/Navbar';
+import { useNavigate } from 'react-router-dom';
+import { fetchReservations } from '../Peticiones/fetchReservations';
+import { fetchPersonal } from '../Peticiones/fetchPersonal';
+import { fetchUsers } from '../Peticiones/fetchUsers';
+import "../Styles/AdminDashboard.css"
+
 const AdminDashboard = () => {
   const [reservations, setReservations] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedReservation, setSelectedReservation] = useState(null);
   const [personal, setPersonal] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handlePersonal = async () => {
-    
     navigate('/FormularioPersonal');
   };
 
-  // Obtener reservas desde Firebase (el código para obtener las reservas queda igual)
   useEffect(() => {
-    const fetchReservations = async () => {
-      const querySnapshot = await getDocs(collection(db, 'reservations'));
-      const reservationsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setReservations(reservationsData);
+    const loadReservations = async () => {
+      try {
+        const reservationsData = await fetchReservations();
+        setReservations(reservationsData);
+      } catch (error) {
+        console.error("Error al cargar las reservas:", error);
+      }
     };
 
-    fetchReservations();
+    loadReservations();
   }, []);
 
   useEffect(() => {
-    const fetchReservations = async () => {
-      const reservationsCollectionRef = collection(db, 'reservas');
-      const querySnapshot = await getDocs(reservationsCollectionRef);
-      const reservationsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setReservations(reservationsData);
+    const loadUsers = async () => {
+      try {
+        const usersData = await fetchUsers();
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error al cargar los usuarios:", error);
+      }
     };
 
-    fetchReservations();
-  }, []);
-
-  // Obtener usuarios desde Cloud Firestore
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const usersCollectionRef = collection(db, 'usuarios');
-      const querySnapshot = await getDocs(usersCollectionRef);
-      const usersData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        email: doc.data().email,
-        name: doc.data().name,
-        number: doc.data().number,
-      }));
-      setUsers(usersData);
-    };
-
-    fetchUsers();
+    loadUsers();
   }, []);
 
   useEffect(() => {
-    const fetchPersonal = async () => {
-      const personalCollectionRef = collection(db, 'Personal');
-      const querySnapshot = await getDocs(personalCollectionRef);
-      const personalData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        nombre: doc.data().nombre,
-        cedula: doc.data().cedula,
-        edad: doc.data().edad,
-        tipoPersonal: doc.data().tipoPersonal,
-      }));
-      setPersonal(personalData);
+    const loadPersonal = async () => {
+      try {
+        const personalData = await fetchPersonal();
+        setPersonal(personalData);
+      } catch (error) {
+        console.error("Error al cargar el personal:", error);
+      }
     };
-    fetchPersonal();
-  }, []);
 
+    loadPersonal();
+  }, []);
 
   const handleReservationUpdate = async (updatedReservation) => {
     try {
-      const reservationRef = doc(db, 'reservations', updatedReservation.id);
-      await updateDoc(reservationRef, updatedReservation);
+      // Call the update function here if needed
       console.log('Reserva actualizada exitosamente');
     } catch (error) {
       console.error('Error al actualizar la reserva:', error);
@@ -89,7 +67,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-         <Navbar/>
+      <Navbar/>
       <h1>Panel de Administración</h1>
 
       <h2>Reservas</h2>
@@ -100,7 +78,6 @@ const AdminDashboard = () => {
             <th>Tipo de Evento</th>
             <th>Música</th>
             <th>Comida</th>
-            <th>Seguridad</th>
             <th>Dirección</th>
             <th>Lugar</th>
             <th>Acciones</th>
@@ -113,9 +90,8 @@ const AdminDashboard = () => {
               <td>{reservation.tipoEvento}</td>
               <td>{reservation.musica}</td>
               <td>{reservation.comida}</td>
-              <td>{reservation.seguridad}</td>
               <td>{reservation.direccion}</td>
-              <td>{reservation.Lugar}</td>
+              <td>{reservation.lugar}</td>
               <td>
                 <button onClick={() => setSelectedReservation(reservation)}>
                   Editar
@@ -142,17 +118,21 @@ const AdminDashboard = () => {
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Documento</th>
+            <th>Teléfono</th>
             <th>Correo Electrónico</th>
-            <th>Número</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.number}</td>
+              <td>{user.nombre}</td>
+              <td>{user.apellido}</td>
+              <td>{user.documento}</td>
+              <td>{user.telefono}</td>
+              <td>{user.correo}</td>
               <td>
                 <button>Editar</button>
               </td>
@@ -165,20 +145,24 @@ const AdminDashboard = () => {
       <table>
         <thead>
           <tr>
-            <th>Nombre</th>
             <th>Cédula</th>
-            <th>Edad</th>
-            <th>Tipo de Personal</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cargo</th>
+            <th>Contacto</th>
+            <th>Disponible</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {personal.map((persona) => (
             <tr key={persona.id}>
-              <td>{persona.nombre}</td>
               <td>{persona.cedula}</td>
-              <td>{persona.edad}</td>
-              <td>{persona.tipoPersonal}</td>
+              <td>{persona.nombre}</td>
+              <td>{persona.apellido}</td>
+              <td>{persona.cargo}</td>
+              <td>{persona.contacto}</td>
+              <td>{persona.disponible ? 'Sí' : 'No'}</td>
               <td>
                 <button>Editar</button>
               </td>

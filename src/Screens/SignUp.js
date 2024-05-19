@@ -9,6 +9,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [document, setDocument] = useState("");
   const [number, setNumber] = useState("");
   const navigate = useNavigate();
 
@@ -16,10 +18,11 @@ const SignUp = () => {
     e.preventDefault();
 
     const userData = {
-      name,
-      number,
-      email,
-      password,
+      documento: document,
+      nombre: name,
+      apellido: lastName,
+      telefono: number,
+      correo: email
     };
 
     try {
@@ -28,13 +31,13 @@ const SignUp = () => {
       if (isRegistered) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log(userCredential);
-        console.log("Registrado existosamente como, " + name + " " + number + " " + email + " " + password);
+        console.log(`Registrado existosamente como, ${name} ${lastName} ${document} ${number} ${email}`);
         navigate('/home');
       } else {
         console.log("Error al registrar el usuario");
       }
     } catch (error) {
-      console.error("Error during signup", error);
+      console.error("Error durante el registro", error);
     }
   };
 
@@ -53,6 +56,22 @@ const SignUp = () => {
             placeholder="Nombre"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Apellido"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Documento"
+            value={document}
+            onChange={(e) => setDocument(e.target.value)}
           />
         </div>
         <div className="form-group">

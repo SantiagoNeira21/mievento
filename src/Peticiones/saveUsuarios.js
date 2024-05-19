@@ -1,6 +1,6 @@
 
 export const saveUsuarios = async (userData) => {
-  const url = 'http://localhost:8080/api/v1/cliente/usuarios/resgistro'; // Reemplaza con la URL correcta de tu backend
+  const url = 'http://localhost:8080/api/v1/cliente/usuario/registro'; // Replace with your backend URL
 
   try {
     const response = await fetch(url, {
@@ -15,11 +15,13 @@ export const saveUsuarios = async (userData) => {
       throw new Error(`Error al registrar el usuario: ${response.status}`);
     }
 
-    // Aquí puedes procesar la respuesta del backend si es necesario
+    // Process the backend response if necessary
     console.log('Usuario registrado exitosamente');
-    return true; // Retorna true para indicar que el registro fue exitoso
+    return true; // Return true to indicate the registration was successful
   } catch (error) {
     console.error('Error al registrar el usuario:', error);
-    return false; // Retorna false para indicar que hubo un error
+    return false; // Return false to indicate an error occurred
   }
 };
+
+//Ya funciona

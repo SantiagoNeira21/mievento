@@ -20,6 +20,12 @@ function Navbar() {
     navigate('/Reservas');
   }
 
+   const InicioSesion = () => {
+
+
+    navigate('/Login');
+  }
+
   const loginBTN = () => {
     navigate('/Login');
   }
@@ -106,13 +112,14 @@ function Navbar() {
           </ul>
           <div className="navbar-botones">
           {userName ? (
-    <span>Bienvenido, {userName}</span>
+    <span>Bienvenido</span>
   ) : (
     <button type="button" className="btn btn-outline-secondary" onClick={loginBTN}>
       Iniciar Sesión
     </button>
   )}
             <button type="button" class="btn2" onClick={resrvasBTN}>Reserva Ya!</button>  
+            <button type="button" class="btn3" onClick={InicioSesion}>Cerrar Sesion</button>  
           </div>
         </div>
       </div>
