@@ -21,3 +21,4 @@ export const savePersonal = async (nuevoRegistro) => {
     throw error; // Lanza el error para que pueda ser capturado en el componente
   }
 };
+//Ya funciona
