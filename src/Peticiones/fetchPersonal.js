@@ -13,3 +13,5 @@ export const fetchPersonal = async () => {
       return [];
     }
   };
+
+  //funciona
