@@ -11,7 +11,6 @@ export default function Reservas() {
   const [numPeople, setNumPeople] = useState(null);
   const [musicType, setMusicType] = useState(null);
   const [food, setFood] = useState(null);
-  const [security, setSecurity] = useState(null);
   const [address, setAddress] = useState(null);
   const [place, setPlace] = useState(null);
 
@@ -35,9 +34,6 @@ export default function Reservas() {
     setFood(e.target.value);
   };
 
-  const handleSecurityChange = (e) => {
-    setSecurity(e.target.value);
-  };
 
   const handleDateChange = (e) => {
     const selectedDate = e.value;
@@ -55,7 +51,6 @@ export default function Reservas() {
       tipoEvento: eventType || 'No seleccionado',
       musica: musicType || 'No seleccionada',
       comida: food || 'No seleccionada',
-      
       direccion: address || 'No ingresada',
       Lugar: place || "No ingresada",
     };
