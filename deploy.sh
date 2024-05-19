@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Construir la imagen de Docker
-docker build -t mievento -f Dockerfile.react .
+docker build -t mievento -f Dockerfile .
 
 # Detener y eliminar el contenedor antiguo
 docker stop mievento || true
