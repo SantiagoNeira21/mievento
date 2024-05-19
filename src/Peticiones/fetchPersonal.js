@@ -1,5 +1,5 @@
 export const fetchPersonal = async () => {
-    const url = 'http://localhost:8080/api/v1/getPersonal'; // Replace with your backend URL
+    const url = 'http://localhost:8080/api/v1/administrador/getPersonal'; // Replace with your backend URL
   
     try {
       const response = await fetch(url);
