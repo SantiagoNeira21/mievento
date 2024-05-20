@@ -17,5 +17,6 @@ export const saveReserva = async (formData) => {
       console.log('Reserva guardada exitosamente');
     } catch (error) {
       console.error('Error al guardar la reserva:', error);
+      return Promise.reject(error);
     }
   };

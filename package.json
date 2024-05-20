@@ -11,17 +11,18 @@
     "dayjs": "^1.11.11",
     "firebase": "^10.11.1",
     "gh-pages": "^6.1.1",
+    "leaflet": "^1.9.4",
     "lodash": "^4.17.1",
     "primeicons": "^7.0.0",
     "primereact": "^10.6.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.23.0",
     "react-scripts": "^5.0.1",
     "sweetalert2": "^11.11.0",
     "web-vitals": "^2.1.4"
   },
-
   "homepage": "http://SantiagoNeira21.github.io/mievento",
   "scripts": {
     "start": "react-scripts start",

@@ -5,6 +5,9 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import '../Styles/Reservas.css';
 import Navbar from '../Components/Navbar/Navbar';
 import { saveReserva } from '../Peticiones/saveReserva';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import Swal from 'sweetalert2';
 
 export default function Reservas() {
   const [date, setDate] = useState(null);
@@ -20,27 +23,51 @@ export default function Reservas() {
   const [endTime, setEndTime] = useState("");
   const [userData, setUserData] = useState({});
 
+  const [mapPosition, setMapPosition] = useState(null);
+
+  const LocationMarker = () => {
+    const map = useMapEvents({
+      click(e) {
+        const newLatLng = e.latlng;
+        setTimeout(() => {
+          setMapPosition(newLatLng);
+          map.flyTo(newLatLng, map.getZoom());
+        }, 0);
+      },
+    });
+
+    return mapPosition === null ? null : (
+      <>
+        <Marker position={mapPosition}></Marker>
+        {setAddress(mapPosition)}
+      </>
+    );
+  };
+  
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       setUserData(user);
     }
   }, []);
-
   const handleReservar = () => {
+    const formattedDate = date
+      ? `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+      : "No seleccionada";
+  
     const formData = {
       cliente: userData,
       lugar: place || "No ingresado",
       musica: musicType || "No seleccionada",
       comida: food || "No seleccionada",
       direccion: address || "No ingresada",
-      fecha: date ? `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` : "No seleccionada",
+      fecha: formattedDate,
       metodoPago: "Tarjeta de crédito",
       evento: {
         type: eventType ? eventType.toLowerCase().replace(" ", "") : "no-seleccionado",
-        nombre: eventName || `${eventType || "Evento"} del ${date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : "No seleccionada"}`,
+        nombre: eventName || `${eventType || "Evento"} del ${date ? `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}` : "No seleccionada"}`,
         descripcion: eventDescription || `Un ${eventType || "evento"} en ${place || "un lugar no especificado"}`,
-        fecha: date ? `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` : "No seleccionada",
+        fecha: formattedDate,
         horaInicio: startTime || "19:00",
         horaFin: endTime || "23:00",
         capacidadMaxima: numPeople ? parseInt(numPeople.split(" - ")[0]) : 0,
@@ -55,15 +82,30 @@ export default function Reservas() {
         }
       }
     };
+  
     console.log(formData);
-    saveReserva(formData);
+    saveReserva(formData)
+    .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reserva realizada con éxito!',
+      });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops... Algo salió mal!',
+        text: 'Por favor, revisa los datos de la reserva.',
+        footer: '<a href>¿Por qué tengo este problema?</a>'
+      });
+    });
   };
 
   return (
     <div className="card flex justify-content-center">
       <Navbar/>
       <div className="custom-calendar">
-        <Calendar value={date} onChange={setDate} inline showWeek />
+      <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
       </div>
       <h2>Elige lo que mejor se acomode a lo que requieres:</h2>
       <div>
@@ -223,7 +265,14 @@ export default function Reservas() {
 
       <div>
         <label><h2>Dirección:</h2></label>
-        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+
+        <MapContainer center={[4.716, -74.027]} zoom={13} scrollWheelZoom={false} style={{ height: '250px', width: '100%' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LocationMarker />
+        </MapContainer>
+        
       </div>
 
       <div>
