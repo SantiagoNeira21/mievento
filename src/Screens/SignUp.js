@@ -1,3 +1,4 @@
+// SignUp.js
 import React, { useState } from 'react';
 import '../Styles/SignUp.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -32,8 +33,8 @@ const SignUp = () => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log(userCredential);
         console.log(`Registrado existosamente como, ${name} ${lastName} ${document} ${number} ${email}`);
-        localStorage.setItem('userName', name);
-        localStorage.setItem('userLastName', lastName);
+        
+        localStorage.setItem('user', JSON.stringify(userData)); // Guardar todos los datos del usuario
         navigate('/home');
       } else {
         console.log("Error al registrar el usuario");
