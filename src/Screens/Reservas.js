@@ -82,7 +82,7 @@ export default function Reservas() {
         horaFin: endTime || "23:00",
         capacidadMaxima: numPeople ? parseInt(numPeople.split(" - ")[0]) : 0,
         tipoMusica: musicType ? musicType.toUpperCase() : "NO_SELECCIONADA",
-        tipoComida: food === "Plato basico" ? "BASICA" : food === "Plato fuerte" ? "FUERTE" : "SIN_COMIDA",
+        tipoComida: food === "Plato basico" ? "BASICO" : food === "Plato fuerte" ? "FUERTE" : "SIN_COMIDA",
       },
     };
     console.log(formData);
@@ -107,8 +107,8 @@ export default function Reservas() {
         <div>
           <input
             type="radio"
-            value="15 anios"
-            checked={eventType === '15 anios'}
+            value="quinceAnos"
+            checked={eventType === 'quinceAnos'}
             onChange={handleEventTypeChange}
           />
           <label>15 años</label>
@@ -141,29 +141,29 @@ export default function Reservas() {
         <div>
           <input
             type="radio"
+            value="Urbana"
+            checked={musicType === 'Urbana'}
+            onChange={handleMusicTypeChange}
+          />
+          <label>Urbana</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="Ochentas"
+            checked={musicType === 'Ochentas'}
+            onChange={handleMusicTypeChange}
+          />
+          <label>Ochentas</label>
+        </div>
+        <div>
+          <input
+            type="radio"
             value="Clasica"
             checked={musicType === 'Clasica'}
             onChange={handleMusicTypeChange}
           />
-          <label>Juvenil</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="Juvenil"
-            checked={musicType === 'Juvenil'}
-            onChange={handleMusicTypeChange}
-          />
-          <label>ViejoTeca</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="ViejoTeca"
-            checked={musicType === 'ViejoTeca'}
-            onChange={handleMusicTypeChange}
-          />
-          <label>Académico</label>
+          <label>Clasica</label>
         </div>
       </div>
 
