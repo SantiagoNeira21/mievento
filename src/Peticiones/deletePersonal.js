@@ -1,5 +1,5 @@
 export const deletePersonal = async (personalId) => {
-    const url = `http://localhost:8080/api/v1/cliente/personal/delete/${personalId}`;
+    const url = `http://localhost:8080/api/v1/administrador/personal/delete/${personalId}`;
   
     try {
       const response = await fetch(url, {
@@ -15,4 +15,3 @@ export const deletePersonal = async (personalId) => {
       throw error;
     }
   };
-  
