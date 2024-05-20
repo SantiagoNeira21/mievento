@@ -90,7 +90,7 @@ function Navbar() {
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="/UserDashboard">
-                    Hacer reservas
+                    Ver mis reservas
                   </a>
                 </li>
               </ul>
