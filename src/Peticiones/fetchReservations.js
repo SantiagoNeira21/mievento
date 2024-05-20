@@ -1,7 +1,7 @@
 
 
 export const fetchReservations = async () => {
-    const url = 'http://localhost:8080/api/v1/getReservations'; // Replace with your backend URL
+    const url = 'http://localhost:8080/api/v1/administrador/reservas/todos'; // Replace with your backend URL
   
     try {
       const response = await fetch(url);
