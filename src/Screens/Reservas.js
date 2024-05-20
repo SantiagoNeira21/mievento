@@ -13,6 +13,26 @@ export default function Reservas() {
   const [food, setFood] = useState(null);
   const [address, setAddress] = useState(null);
   const [place, setPlace] = useState(null);
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  const handleEventNameChange = (e) => {
+    setEventName(e.target.value);
+  };
+
+  const handleEventDescriptionChange = (e) => {
+    setEventDescription(e.target.value);
+  };
+
+  const handleStartTimeChange = (e) => {
+    setStartTime(e.target.value);
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
 
   const handleEventTypeChange = (e) => {
     setEventType(e.target.value);
@@ -47,14 +67,25 @@ export default function Reservas() {
 
   const handleReservar = () => {
     const formData = {
-      fecha: date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : 'No seleccionada',
-      tipoEvento: eventType || 'No seleccionado',
-      musica: musicType || 'No seleccionada',
-      comida: food || 'No seleccionada',
-      direccion: address || 'No ingresada',
-      Lugar: place || "No ingresada",
+      lugar: place || "No ingresado",
+      musica: musicType || "No seleccionada",
+      comida: food || "No seleccionada",
+      direccion: address || "No ingresada",
+      fecha: date ? `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` : "No seleccionada",
+      metodoPago: "Tarjeta de crédito",
+      evento: {
+        type: eventType ? eventType.toLowerCase().replace(" ", "") : "no-seleccionado",
+        nombre: eventName || `${eventType || "Evento"} del ${date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : "No seleccionada"}`,
+        descripcion: eventDescription || `Un ${eventType || "evento"} en ${place || "un lugar no especificado"}`,
+        fecha: date ? `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` : "No seleccionada",
+        horaInicio: startTime || "19:00",
+        horaFin: endTime || "23:00",
+        capacidadMaxima: numPeople ? parseInt(numPeople.split(" - ")[0]) : 0,
+        tipoMusica: musicType ? musicType.toUpperCase() : "NO_SELECCIONADA",
+        tipoComida: food === "Plato basico" ? "BASICA" : food === "Plato fuerte" ? "FUERTE" : "SIN_COMIDA",
+      },
     };
-
+    console.log(formData);
     saveReserva(formData); // Llama a la función para guardar la reserva
   };
 
@@ -76,8 +107,8 @@ export default function Reservas() {
         <div>
           <input
             type="radio"
-            value="15 años"
-            checked={eventType === '15 años'}
+            value="15 anios"
+            checked={eventType === '15 anios'}
             onChange={handleEventTypeChange}
           />
           <label>15 años</label>
@@ -249,6 +280,28 @@ export default function Reservas() {
         
         <input type="text" value={address} onChange={handleAddressChange} />
       </div>
+
+
+      <div>
+        <label><h2>Nombre del evento:</h2></label>
+        <input type="text" value={eventName} onChange={handleEventNameChange} />
+      </div>
+
+      <div>
+        <label><h2>Descripción del evento:</h2></label>
+        <textarea value={eventDescription} onChange={handleEventDescriptionChange} />
+      </div>
+
+      <div>
+        <label><h2>Hora de inicio:</h2></label>
+        <input type="time" value={startTime} onChange={handleStartTimeChange} />
+      </div>
+
+      <div>
+        <label><h2>Hora de finalización:</h2></label>
+        <input type="time" value={endTime} onChange={handleEndTimeChange} />
+      </div>
+
 
       <button onClick={handleReservar}>Reservar</button>
     </div>
