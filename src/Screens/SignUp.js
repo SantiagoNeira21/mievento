@@ -32,6 +32,8 @@ const SignUp = () => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log(userCredential);
         console.log(`Registrado existosamente como, ${name} ${lastName} ${document} ${number} ${email}`);
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userLastName', lastName);
         navigate('/home');
       } else {
         console.log("Error al registrar el usuario");

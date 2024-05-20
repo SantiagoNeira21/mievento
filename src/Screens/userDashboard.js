@@ -47,10 +47,14 @@ const UserDashboard = () => {
     }
   };
 
+  const userName = localStorage.getItem('userName');
+  const userLastName = localStorage.getItem('userLastName');
+
   return (
     <div>
       <Navbar/>
       <h1>Panel de Usuario</h1>
+      
 
       <h2>Mis Reservas</h2>
       <table>
@@ -84,7 +88,8 @@ const UserDashboard = () => {
         </tbody>
       </table>
 
-      <h2>Mi Perfil</h2>
+      <h3>Mi Perfil</h3>
+      <h2>Hola, {userName} {userLastName}</h2>
       <div>
         {users.map((user) => (
           <div key={user.id}>

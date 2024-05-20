@@ -1,6 +1,6 @@
 
 export const saveUsuarios = async (userData) => {
-  const url = 'http://localhost:8080/api/v1/cliente/usuario/registro'; // Replace with your backend URL
+  const url = 'http://localhost:8080/api/v1/administrador/usuario/registro'; // Replace with your backend URL
 
   try {
     const response = await fetch(url, {
