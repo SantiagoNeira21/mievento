@@ -97,7 +97,6 @@ const AdminDashboard = () => {
         <thead>
           <tr>
             <th>Fecha</th>
-            <th>Tipo de Evento</th>
             <th>Música</th>
             <th>Comida</th>
             <th>Dirección</th>
@@ -109,7 +108,6 @@ const AdminDashboard = () => {
           {reservations.map((reservation) => (
             <tr key={reservation.id}>
               <td>{reservation.fecha}</td>
-              <td>{reservation.tipoEvento}</td>
               <td>{reservation.musica}</td>
               <td>{reservation.comida}</td>
               <td>{reservation.direccion}</td>

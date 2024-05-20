@@ -1,5 +1,5 @@
 export const deleteReservation = async (reservationId) => {
-    const url = `http://localhost:8080/api/v1/cliente/reserva/delete/${reservationId}`;
+    const url = `http://localhost:8080/api/v1/cliente/reserva/eliminar/${reservationId}`;
   
     try {
       const response = await fetch(url, {
