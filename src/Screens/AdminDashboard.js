@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { fetchReservations } from '../Peticiones/fetchReservations';
 import { fetchPersonal } from '../Peticiones/fetchPersonal';
 import { fetchUsers } from '../Peticiones/fetchUsers';
-import "../Styles/AdminDashboard.css"
+import { deleteReservation } from '../Peticiones/deleteReservation';
+import { deletePersonal } from '../Peticiones/deletePersonal';
+import "../Styles/AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [reservations, setReservations] = useState([]);
@@ -65,6 +67,26 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleReservationDelete = async (reservationId) => {
+    try {
+      await deleteReservation(reservationId);
+      setReservations(reservations.filter(reservation => reservation.id !== reservationId));
+      console.log('Reserva eliminada exitosamente');
+    } catch (error) {
+      console.error('Error al eliminar la reserva:', error);
+    }
+  };
+
+  const handlePersonalDelete = async (personalId) => {
+    try {
+      await deletePersonal(personalId);
+      setPersonal(personal.filter(persona => persona.id !== personalId));
+      console.log('Personal eliminado exitosamente');
+    } catch (error) {
+      console.error('Error al eliminar el personal:', error);
+    }
+  };
+
   return (
     <div>
       <Navbar/>
@@ -95,6 +117,9 @@ const AdminDashboard = () => {
               <td>
                 <button onClick={() => setSelectedReservation(reservation)}>
                   Editar
+                </button>
+                <button onClick={() => handleReservationDelete(reservation.id)}>
+                  Eliminar
                 </button>
               </td>
             </tr>
@@ -165,6 +190,17 @@ const AdminDashboard = () => {
               <td>{persona.disponible ? 'Sí' : 'No'}</td>
               <td>
                 <button>Editar</button>
+                <button
+  onClick={() => {
+    if (persona.idPersonal) {
+      handlePersonalDelete(persona.idPersonal);
+    } else {
+      console.error('El ID del personal es inválido');
+    }
+  }}
+>
+  Eliminar
+</button>
               </td>
             </tr>
           ))}
