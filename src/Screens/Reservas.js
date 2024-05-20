@@ -28,17 +28,17 @@ export default function Reservas() {
   const LocationMarker = () => {
     const map = useMapEvents({
       click(e) {
-        const newLatLng = e.latlng;
+        const newLatLng = `${e.latlng.lat}, ${e.latlng.lng}`;
         setTimeout(() => {
           setMapPosition(newLatLng);
-          map.flyTo(newLatLng, map.getZoom());
+          map.flyTo(e.latlng, map.getZoom());
         }, 0);
       },
     });
 
     return mapPosition === null ? null : (
       <>
-        <Marker position={mapPosition}></Marker>
+        <Marker position={mapPosition.split(', ').map(parseFloat)}></Marker>
         {setAddress(mapPosition)}
       </>
     );
@@ -64,7 +64,7 @@ export default function Reservas() {
       fecha: formattedDate,
       metodoPago: "Tarjeta de crédito",
       evento: {
-        type: eventType ? eventType.toLowerCase().replace(" ", "") : "no-seleccionado",
+        type: eventType || "no-seleccionado",
         nombre: eventName || `${eventType || "Evento"} del ${date ? `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}` : "No seleccionada"}`,
         descripcion: eventDescription || `Un ${eventType || "evento"} en ${place || "un lugar no especificado"}`,
         fecha: formattedDate,
@@ -113,7 +113,7 @@ export default function Reservas() {
         <div>
           <input
             type="radio"
-            value="quinceAnos"
+            value="QuinceAnos"
             checked={eventType === 'quinceAnos'}
             onChange={(e) => setEventType(e.target.value)}
           />
