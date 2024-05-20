@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mievento/static/css/main.dc20e705.css",
-    "main.js": "/mievento/static/js/main.79115fa4.js",
+    "main.js": "/mievento/static/js/main.2bb9db1d.js",
     "static/js/453.7b640540.chunk.js": "/mievento/static/js/453.7b640540.chunk.js",
     "static/media/FondoLogin.png": "/mievento/static/media/FondoLogin.079fd79830d2f1668e80.png",
     "static/media/concert-2527495_1920 1.png": "/mievento/static/media/concert-2527495_1920 1.000afe59f0c70daa502d.png",
@@ -9,11 +9,11 @@
     "static/media/Inter-roman.var.woff2?v=3.19": "/mievento/static/media/Inter-roman.var.ba4caefcdf5b36b438db.woff2",
     "index.html": "/mievento/index.html",
     "main.dc20e705.css.map": "/mievento/static/css/main.dc20e705.css.map",
-    "main.79115fa4.js.map": "/mievento/static/js/main.79115fa4.js.map",
+    "main.2bb9db1d.js.map": "/mievento/static/js/main.2bb9db1d.js.map",
     "453.7b640540.chunk.js.map": "/mievento/static/js/453.7b640540.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dc20e705.css",
-    "static/js/main.79115fa4.js"
+    "static/js/main.2bb9db1d.js"
   ]
 }
