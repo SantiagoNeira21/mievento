@@ -1,6 +1,6 @@
 // src/Peticiones/savePersonal.js
 export const savePersonal = async (nuevoRegistro) => {
-  const url = 'http://localhost:8080/api/v1/cliente/personal/guardar'; // Reemplaza con la URL correcta de tu backend
+  const url = 'http://localhost:8080/api/v1/administrador/personal/guardar'; // Reemplaza con la URL correcta de tu backend
 
   try {
     const response = await fetch(url, {
