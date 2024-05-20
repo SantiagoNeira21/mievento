@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+// Reservas.js
+import React, { useState, useEffect } from "react";
 import { Calendar } from 'primereact/calendar';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import '../Styles/Reservas.css';
 import Navbar from '../Components/Navbar/Navbar';
-import { saveReserva } from '../Peticiones/saveReserva'; // Importa la función para guardar la reserva
+import { saveReserva } from '../Peticiones/saveReserva';
 
 export default function Reservas() {
   const [date, setDate] = useState(null);
@@ -17,56 +18,18 @@ export default function Reservas() {
   const [eventDescription, setEventDescription] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [userData, setUserData] = useState({});
 
-  const handleEventNameChange = (e) => {
-    setEventName(e.target.value);
-  };
-
-  const handleEventDescriptionChange = (e) => {
-    setEventDescription(e.target.value);
-  };
-
-  const handleStartTimeChange = (e) => {
-    setStartTime(e.target.value);
-  };
-
-  const handleEndTimeChange = (e) => {
-    setEndTime(e.target.value);
-  };
-
-  const handleEventTypeChange = (e) => {
-    setEventType(e.target.value);
-  };
-
-  const handlePlaceChange = (e) => {
-    setPlace(e.target.value);
-  };
-
-  const handleNumPeopleChange = (e) => {
-    setNumPeople(e.target.value);
-  };
-
-  const handleMusicTypeChange = (e) => {
-    setMusicType(e.target.value);
-  };
-
-  const handleFoodChange = (e) => {
-    setFood(e.target.value);
-  };
-
-
-  const handleDateChange = (e) => {
-    const selectedDate = e.value;
-    setDate(selectedDate);
-    console.log(`Fecha seleccionada: ${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`);
-  };
-
-  const handleAddressChange = (e) => {
-    setAddress(e.target.value);
-  };
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setUserData(user);
+    }
+  }, []);
 
   const handleReservar = () => {
     const formData = {
+      cliente: userData,
       lugar: place || "No ingresado",
       musica: musicType || "No seleccionada",
       comida: food || "No seleccionada",
@@ -83,23 +46,24 @@ export default function Reservas() {
         capacidadMaxima: numPeople ? parseInt(numPeople.split(" - ")[0]) : 0,
         tipoMusica: musicType ? musicType.toUpperCase() : "NO_SELECCIONADA",
         tipoComida: food === "Plato basico" ? "BASICO" : food === "Plato fuerte" ? "FUERTE" : "SIN_COMIDA",
-      },
+        administrador: {
+          documento: 123456789,
+          nombre: "Ana",
+          apellido: "Gómez",
+          telefono: "3001234567",
+          correo: "ana.gomez@example.com"
+        }
+      }
     };
     console.log(formData);
-    saveReserva(formData); // Llama a la función para guardar la reserva
+    saveReserva(formData);
   };
-
-
-
-
-
-
 
   return (
     <div className="card flex justify-content-center">
-       <Navbar/>
+      <Navbar/>
       <div className="custom-calendar">
-        <Calendar value={date} onChange={handleDateChange} inline showWeek />
+        <Calendar value={date} onChange={setDate} inline showWeek />
       </div>
       <h2>Elige lo que mejor se acomode a lo que requieres:</h2>
       <div>
@@ -109,7 +73,7 @@ export default function Reservas() {
             type="radio"
             value="quinceAnos"
             checked={eventType === 'quinceAnos'}
-            onChange={handleEventTypeChange}
+            onChange={(e) => setEventType(e.target.value)}
           />
           <label>15 años</label>
         </div>
@@ -118,7 +82,7 @@ export default function Reservas() {
             type="radio"
             value="Rumba"
             checked={eventType === 'Rumba'}
-            onChange={handleEventTypeChange}
+            onChange={(e) => setEventType(e.target.value)}
           />
           <label>Rumba</label>
         </div>
@@ -127,23 +91,20 @@ export default function Reservas() {
             type="radio"
             value="Boda"
             checked={eventType === 'Boda'}
-            onChange={handleEventTypeChange}
+            onChange={(e) => setEventType(e.target.value)}
           />
           <label>Boda</label>
         </div>
       </div>
 
-
-      {/* #######################*/}
-
       <div>
-        <label><h2>Tipo de musica:</h2> </label>
+        <label><h2>Tipo de musica:</h2></label>
         <div>
           <input
             type="radio"
             value="Urbana"
             checked={musicType === 'Urbana'}
-            onChange={handleMusicTypeChange}
+            onChange={(e) => setMusicType(e.target.value)}
           />
           <label>Urbana</label>
         </div>
@@ -152,7 +113,7 @@ export default function Reservas() {
             type="radio"
             value="Ochentas"
             checked={musicType === 'Ochentas'}
-            onChange={handleMusicTypeChange}
+            onChange={(e) => setMusicType(e.target.value)}
           />
           <label>Ochentas</label>
         </div>
@@ -161,22 +122,20 @@ export default function Reservas() {
             type="radio"
             value="Clasica"
             checked={musicType === 'Clasica'}
-            onChange={handleMusicTypeChange}
+            onChange={(e) => setMusicType(e.target.value)}
           />
           <label>Clasica</label>
         </div>
       </div>
 
-      {/* #######################*/}
-
       <div>
-        <label><h2>Cantidad de personas:</h2> </label>
+        <label><h2>Cantidad de personas:</h2></label>
         <div>
           <input
             type="radio"
             value="-500"
             checked={numPeople === '-500'}
-            onChange={handleNumPeopleChange}
+            onChange={(e) => setNumPeople(e.target.value)}
           />
           <label>-500</label>
         </div>
@@ -185,7 +144,7 @@ export default function Reservas() {
             type="radio"
             value="500 - 2000"
             checked={numPeople === '500 - 2000'}
-            onChange={handleNumPeopleChange}
+            onChange={(e) => setNumPeople(e.target.value)}
           />
           <label>500 - 2000</label>
         </div>
@@ -193,23 +152,21 @@ export default function Reservas() {
           <input
             type="radio"
             value="+2000"
-            checked={numPeople   === '+2000'}
-            onChange={handleNumPeopleChange}
+            checked={numPeople === '+2000'}
+            onChange={(e) => setNumPeople(e.target.value)}
           />
           <label>+2000</label>
         </div>
       </div>
 
-      {/* #######################*/}
-
       <div>
-        <label><h2>Comida</h2> </label>
+        <label><h2>Comida</h2></label>
         <div>
           <input
             type="radio"
             value="Plato basico"
             checked={food === 'Plato basico'}
-            onChange={handleFoodChange}
+            onChange={(e) => setFood(e.target.value)}
           />
           <label>Plato basico</label>
         </div>
@@ -218,7 +175,7 @@ export default function Reservas() {
             type="radio"
             value="Plato fuerte"
             checked={food === 'Plato fuerte'}
-            onChange={handleFoodChange}
+            onChange={(e) => setFood(e.target.value)}
           />
           <label>Plato fuerte</label>
         </div>
@@ -226,27 +183,21 @@ export default function Reservas() {
           <input
             type="radio"
             value="Sin comida"
-            checked={food   === 'Sin comida'}
-            onChange={handleFoodChange}
+            checked={food === 'Sin comida'}
+            onChange={(e) => setFood(e.target.value)}
           />
           <label>Sin comida</label>
         </div>
       </div>
 
-      {/* #######################*/}
-
-      
-
-{/* #######################*/}
-
-<div>
-        <label><h2>Tipo de lugar</h2> </label>
+      <div>
+        <label><h2>Tipo de lugar</h2></label>
         <div>
           <input
             type="radio"
             value="Campestre"
             checked={place === 'Campestre'}
-            onChange={handlePlaceChange}
+            onChange={(e) => setPlace(e.target.value)}
           />
           <label>Campestre</label>
         </div>
@@ -255,7 +206,7 @@ export default function Reservas() {
             type="radio"
             value="Abierto"
             checked={place === 'Abierto'}
-            onChange={handlePlaceChange}
+            onChange={(e) => setPlace(e.target.value)}
           />
           <label>Abierto</label>
         </div>
@@ -263,45 +214,37 @@ export default function Reservas() {
           <input
             type="radio"
             value="Cerrado"
-            checked={place   === 'Cerrado'}
-            onChange={handlePlaceChange}
+            checked={place === 'Cerrado'}
+            onChange={(e) => setPlace(e.target.value)}
           />
           <label>Cerrado</label>
         </div>
       </div>
 
-
-
       <div>
-
-
-
-        <label><h2>Direccion: </h2></label>
-        
-        <input type="text" value={address} onChange={handleAddressChange} />
+        <label><h2>Dirección:</h2></label>
+        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
       </div>
-
 
       <div>
         <label><h2>Nombre del evento:</h2></label>
-        <input type="text" value={eventName} onChange={handleEventNameChange} />
+        <input type="text" value={eventName} onChange={(e) => setEventName(e.target.value)} />
       </div>
 
       <div>
         <label><h2>Descripción del evento:</h2></label>
-        <textarea value={eventDescription} onChange={handleEventDescriptionChange} />
+        <textarea value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} />
       </div>
 
       <div>
         <label><h2>Hora de inicio:</h2></label>
-        <input type="time" value={startTime} onChange={handleStartTimeChange} />
+        <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
       </div>
 
       <div>
         <label><h2>Hora de finalización:</h2></label>
-        <input type="time" value={endTime} onChange={handleEndTimeChange} />
+        <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
       </div>
-
 
       <button onClick={handleReservar}>Reservar</button>
     </div>
